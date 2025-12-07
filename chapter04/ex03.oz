@@ -1,10 +1,8 @@
 % Sequencial
 declare
 fun {FibS X}
-    if X =< 2 then 
-        1
-    else 
-        {FibS X-1} + {FibS X-2}
+    if X =< 2 then 1
+    else {FibS X-1} + {FibS X-2}
     end
 end
 
@@ -22,7 +20,7 @@ fun {TimeIt F X}
   T0 = {Time.time}
   _ = {F X}
   T1 = {Time.time}
-in
+in  
   T1 - T0
 end
 
@@ -34,6 +32,6 @@ T(n) = Fib(n+2) – 1 -> Número de chamdas / threads
 T(30) = (Fib(32) - 1) threads
  */
 
-{Browse {FibS 30}} %resultado
-{Browse sequencial#{TimeIt FibS 30}}
-{Browse concorrente#{TimeIt FibC 30}}
+%{Browse {FibS 30}} %resultado
+{Browse sequencial#{TimeIt FibS 33}}
+{Browse concorrente#{TimeIt FibC 33}}
