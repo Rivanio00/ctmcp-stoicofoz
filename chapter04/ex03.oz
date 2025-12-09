@@ -30,8 +30,14 @@ A cada chamda:
 FibC(n) = 1 chamada + 1 thread criada + FibC(n-1) + FibC(n-2)
 T(n) = Fib(n+2) – 1 -> Número de chamdas / threads
 T(30) = (Fib(32) - 1) threads
- */
+T(n) = 1+T(n−1)+T(n−2), fórmula da recorrência
+
+Problemas desse número de threads:
+overhead de agendamento/scheduler
+consumo de memória para stacks
+explosão exponencial de criação -> mais lento que a versão sequencial
+*/
 
 %{Browse {FibS 30}} %resultado
-{Browse sequencial#{TimeIt FibS 33}}
-{Browse concorrente#{TimeIt FibC 33}}
+{Browse sequencial#{TimeIt FibS 30}}
+{Browse concorrente#{TimeIt FibC 30}}

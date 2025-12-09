@@ -64,5 +64,6 @@ o que faz com que cada passo da recursão seja adiado,
 a lista é invertida de forma gradual, de acordo com a requisição de seus termos.
 As duas produzem a mesma lista final [c b a], mas não possuem o mesmo comportamento lazy. 
 Reverse1 é mais eficiente pois evita a criação de diversos trunks desnecessários. 
-Em um programa realmente lazy, a melhor escolha seria Reverse1, pois ela mantém a interface preguiçosa com melhor desempenho.
+Entretanto, em um programa realmente lazy, a melhor escolha seria Reverse2, 
+apresenta o comportamento lazy mais adequado para programas baseados em avaliação preguiçosa.
 */

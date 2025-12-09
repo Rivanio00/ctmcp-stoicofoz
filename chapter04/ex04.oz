@@ -23,4 +23,8 @@ A=1, B=1+1 -> B=2, C=2+1 -> C=3, D=3+1 -> D=4
 Logo, o resultado de ambos os programas é exatamente o mesmo (4), 
 mesmo que o primeiro tenha criado threads em uma ordem arbitrária e o segundo tenha executado sequencialmente,
 pois as threads ficam suspensas esperando o valor das variáveis, o que mantém uma ordem de execução.
+
+Independente da ordem o resultado é igual, 
+se existe uma execução sequencial correta a concorrente também seguirá, 
+o que é definido do modelo declarativo.
 */

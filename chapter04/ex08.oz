@@ -26,7 +26,7 @@ local
     {Browse '--- [2] Suspensão na Thread Principal ---'}
     local A1 in
         {Browse 'Tentando {Show {Filter [5 1 A1 4 0] ...}}'}
-        {Show {Filter [5 1 A1 4 0] fun {$ X} X>2 end}} % Apague essa linha* A1 é unbound, execução fica esperando que seja atribuído valor a ela
+        %{Show {Filter [5 1 A1 4 0] fun {$ X} X>2 end}} % Apague essa linha* A1 é unbound, execução fica esperando que seja atribuído valor a ela
         {Browse 'A thread principal suspende na variável A1 e não exibe nada (Deadlock).'}
     end
 
@@ -63,3 +63,28 @@ local
 in
     skip
 end
+
+/*
+a)  A>2 -> A é unbound, logo a operação “>” não pode ser avaliada, 
+thread suspende nessa instrução, esperando até que A seja ligada. 
+Show suspende e também não exibe nada.
+
+b)  verifica A>2 -> A é unbound, logo a operação “>” não pode ser avaliada, 
+ao mesmo tempo, na execução principal temos {Show Out}, 
+nesse ponto Out está parcialmente ligado. out é uma lista 5|(cauda ainda não ligada)
+resultado exibido é [5|_]
+Então sim, a função é determinística, 
+lembrando que o que define o estado de um programa são os valores das variáveis na memória, 
+o que é mostrado pelo Show não altera o estado, então é determinístico.
+
+c)  Nenhuma outra thread liga valor a variável A, 
+portanto durante o Delay o estado não muda
+Após o atraso a operação {Show Out} mostra [5|_] ou ,
+mas num geral vai mostrar [5|_], o que ainda assim não muda o resultado final.
+
+d)  verifica A>2 -> A é unbound, logo a operação “>” não pode ser avaliada, 
+no entanto temos uma outra thread que executa A=6, 
+após essa ligação a thread volta e pode executar 6>5 -> true então agora temos Out = [5 6|_]
+Continua  pro resto do vetor
+resultato Out = [5 6 4]
+*/
